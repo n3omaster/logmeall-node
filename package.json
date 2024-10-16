@@ -1,0 +1,27 @@
+{
+  "name": "logmeall",
+  "version": "0.1.0",
+  "description": "Log everything in your app and never worry about system analisys.",
+  "main": "logmeall.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n3omaster/logmeall-node.git"
+  },
+  "keywords": [
+    "logmeall",
+    "log",
+    "log",
+    "ingest",
+    "log",
+    "management"
+  ],
+  "author": "n3omaster",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/n3omaster/logmeall-node/issues"
+  },
+  "homepage": "https://github.com/n3omaster/logmeall-node#readme"
+}
