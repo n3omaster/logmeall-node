@@ -13,16 +13,17 @@ npm install logmeall
 ```javascript
 import LogMeAll from 'logmeall';
 
-const logger = new LogMeAll({
+const log = new LogMeAll({
   apiUrl: 'https://www.logmeall.com/api',
   apiKey: 'your-api-key',
+  apiSecret: 'your-api-secret',
 });
 
-logger.info('This is an info message');
-logger.error('This is an error message');
-logger.debug('This is a debug message');
-logger.notice('This is a notice message');
-logger.warning('This is a warning message');
+log.info('This is an info message');
+log.error('This is an error message');
+log.debug('This is a debug message');
+log.notice('This is a notice message');
+log.warning('This is a warning message');
 ```
 
 ## License
