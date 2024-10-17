@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 class LogMeAll {
 
     constructor(apiUrl) {
@@ -8,7 +6,7 @@ class LogMeAll {
 
     async sendLog(level, ...args) {
 
-        console[level](...args);
+        console.log(level, ...args);
 
         const logData = {
             level,
