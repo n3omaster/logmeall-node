@@ -1,7 +1,9 @@
 class LogMeAll {
 
-    constructor(apiUrl) {
+    constructor({ apiUrl, apiKey, apiSecret }) {
         this.apiUrl = apiUrl || 'https://www.logmeall.com/api';
+        this.apiKey = apiKey || '';
+        this.apiSecret = apiSecret || '';
     }
 
     async sendLog(level, ...args) {
@@ -53,4 +55,4 @@ class LogMeAll {
     }
 }
 
-export default new LogMeAll();
+export default LogMeAll;

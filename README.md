@@ -11,7 +11,7 @@ npm install logmeall
 ## Usage
 
 ```javascript
-import { LogMeAll } from 'logmeall';
+import LogMeAll from 'logmeall';
 
 const logger = new LogMeAll({
   apiUrl: 'https://www.logmeall.com/api',
