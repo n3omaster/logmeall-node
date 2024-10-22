@@ -1,17 +1,21 @@
 class LogMeAll {
 
-    constructor({ apiUrl, apiKey, apiSecret }) {
+    constructor({ apiUrl, apiKey, apiSecret, environment }) {
         this.apiUrl = apiUrl || 'https://www.logmeall.com/api';
         this.apiKey = apiKey || '';
         this.apiSecret = apiSecret || '';
+        this.environment = environment || 'development';
     }
 
     async sendLog(level, ...args) {
 
         console.log(level, ...args);
 
+        // Build Body for API Request
         const logData = {
             level,
+            tags: args.find(arg => typeof arg === 'object' && arg.hasOwnProperty('tags'))?.tags || [],
+            environment: this.environment,
             message: args.map(arg =>
                 typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
             ).join(' '),
@@ -23,6 +27,8 @@ class LogMeAll {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-API-KEY': this.apiKey,
+                    'X-API-SECRET': this.apiSecret,
                 },
                 body: JSON.stringify(logData),
             });
@@ -39,11 +45,7 @@ class LogMeAll {
     }
 
     info(...args) {
-        this.sendLog('log', ...args);
-    }
-
-    notice(...args) {
-        this.sendLog('notice', ...args);
+        this.sendLog('info', ...args);
     }
 
     warning(...args) {

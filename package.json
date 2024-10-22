@@ -1,6 +1,6 @@
 {
   "name": "logmeall",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Log everything in your app and never worry about system analisys.",
   "main": "logmeall.js",
   "scripts": {
