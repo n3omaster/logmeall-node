@@ -8,18 +8,16 @@ class LogMeAll {
     }
 
     async sendLog(level, ...args) {
-        
+
         console.log(level, ...args);
 
         // Extract tags and message from args
         const tags = args.find(arg => Array.isArray(arg?.tags))?.tags || [];
         const message = String(args[0]);
         const data = args.length > 1
-            ? args.slice(1)
-                .filter(arg => !Array.isArray(arg?.tags))
-                .map(arg => 
-                    typeof arg === 'object' ? arg : String(arg)
-                ).join(' ')
+            ? args.slice(1).map(arg =>
+                typeof arg === 'object' ? arg : String(arg)
+            ).join(' ')
             : '';
 
         // Build Body for API Request
@@ -44,7 +42,7 @@ class LogMeAll {
                 },
                 body: JSON.stringify(logData),
             });
-            
+
             if (!response.ok) {
                 console.error(`Failed to send log to API: ${response.statusText}`);
                 return;
