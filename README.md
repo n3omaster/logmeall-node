@@ -26,6 +26,12 @@ log.notice('This is a notice message');
 log.warning('This is a warning message');
 ```
 
+## Advanced Usage
+
+```javascript
+log.info('This is an info message', { tags: ['tag1', 'tag2'] });
+```
+
 ## License
 
 This project is licensed under the MIT License.
