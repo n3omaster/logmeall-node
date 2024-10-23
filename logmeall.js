@@ -13,9 +13,12 @@ class LogMeAll {
 
         // Extract tags and message from args
         const tags = args.find(arg => Array.isArray(arg?.tags))?.tags || [];
-        const message = args.map(arg => 
-            typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
-        ).join(' ');
+        const message = String(args[0]);
+        const data = args.length > 1
+            ? args.slice(1).map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+              ).join(' ')
+            : '';
 
         // Build Body for API Request
         const logData = {
@@ -23,6 +26,7 @@ class LogMeAll {
             tags,
             environment: this.environment,
             message,
+            data,
             timestamp: new Date().toISOString(),
         };
 
