@@ -14,11 +14,7 @@ class LogMeAll {
         // Extract tags and message from args
         const tags = args.find(arg => Array.isArray(arg?.tags))?.tags || [];
         const message = String(args[0]);
-        const data = args.length > 1
-            ? args.slice(1).map(arg =>
-                typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
-            ).join(' ')
-            : '';
+        const data = args.length > 1 ? args.slice(1) : {};
 
         // Build Body for API Request
         const logData = {
@@ -29,8 +25,6 @@ class LogMeAll {
             data,
             timestamp: new Date().toISOString(),
         };
-
-        console.log('logData:', JSON.stringify(logData));
 
         try {
             const response = await fetch(this.apiUrl, {
@@ -47,9 +41,6 @@ class LogMeAll {
                 console.error(`Failed to send log to API: ${response.statusText}`);
                 return;
             }
-
-            const responseBody = await response.json();
-            console.log('responseBody:', responseBody);
 
         } catch (error) {
             console.error('Error sending log to API:', error);
