@@ -15,9 +15,11 @@ class LogMeAll {
         const tags = args.find(arg => Array.isArray(arg?.tags))?.tags || [];
         const message = String(args[0]);
         const data = args.length > 1
-            ? args.slice(1).map(arg => 
-                typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
-              ).join(' ')
+            ? args.slice(1)
+                .filter(arg => !Array.isArray(arg?.tags))
+                .map(arg => 
+                    typeof arg === 'object' ? arg : String(arg)
+                ).join(' ')
             : '';
 
         // Build Body for API Request
