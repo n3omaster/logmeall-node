@@ -8,19 +8,25 @@ class LogMeAll {
     }
 
     async sendLog(level, ...args) {
-
+        
         console.log(level, ...args);
+
+        // Extract tags and message from args
+        const tags = args.find(arg => Array.isArray(arg?.tags))?.tags || [];
+        const message = args.map(arg => 
+            typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+        ).join(' ');
 
         // Build Body for API Request
         const logData = {
             level,
-            tags: args.find(arg => typeof arg === 'object' && arg.hasOwnProperty('tags'))?.tags || [],
+            tags,
             environment: this.environment,
-            message: args.map(arg =>
-                typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
-            ).join(' '),
+            message,
             timestamp: new Date().toISOString(),
         };
+
+        console.log('logData:', JSON.stringify(logData));
 
         try {
             const response = await fetch(this.apiUrl, {
@@ -32,8 +38,14 @@ class LogMeAll {
                 },
                 body: JSON.stringify(logData),
             });
+            
+            if (!response.ok) {
+                console.error(`Failed to send log to API: ${response.statusText}`);
+                return;
+            }
 
-            if (!response.ok) { console.error(`Failed to send log to API: ${response.statusText}`); }
+            const responseBody = await response.json();
+            console.log('responseBody:', responseBody);
 
         } catch (error) {
             console.error('Error sending log to API:', error);
