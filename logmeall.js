@@ -16,7 +16,7 @@ class LogMeAll {
         const message = String(args[0]);
         const data = args.length > 1
             ? args.slice(1).map(arg =>
-                typeof arg === 'object' ? arg : String(arg)
+                typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
             ).join(' ')
             : '';
 
